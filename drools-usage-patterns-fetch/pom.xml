@@ -8,10 +8,10 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>drools-usage-patterns-scanner</artifactId>
+	<artifactId>drools-usage-patterns-fetch</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Patterns Scanner</name>
+	<name>Drools Usage Patterns Fetching</name>
 
 	<dependencies>
 		<dependency>

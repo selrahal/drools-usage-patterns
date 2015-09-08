@@ -21,7 +21,7 @@
 		<module>drools-usage-patterns-kjar</module>
 		<module>drools-usage-patterns-model</module>
 		<module>drools-usage-patterns-remote</module>
-		<module>drools-usage-patterns-scanner</module>
+		<module>drools-usage-patterns-fetch</module>
 	</modules>
 
 	<dependencyManagement>
