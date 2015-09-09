@@ -8,10 +8,12 @@ public class EmbeddedKieBaseProvider {
 	private final KieContainer KIE_CONTAINER;
 	
 	public EmbeddedKieBaseProvider() {
+		//This gives us a KieContainer that is built using the classpath. Any rules assets on the
+		//classpath will be used.
 		KIE_CONTAINER = KieServices.Factory.get().newKieClasspathContainer();
 	}
 	
-	public KieBase getKieBaseForDecisionTable() {
+	public KieBase getKieBase() {
 		return KIE_CONTAINER.getKieBase();
 	}
 }

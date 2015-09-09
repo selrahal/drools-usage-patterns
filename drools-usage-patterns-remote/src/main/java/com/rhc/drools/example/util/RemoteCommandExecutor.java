@@ -16,29 +16,31 @@ import com.thoughtworks.xstream.XStream;
 public class RemoteCommandExecutor {
 	private static final Logger LOG = LoggerFactory.getLogger(RemoteCommandExecutor.class);
     private KieServicesClient kieServicesClient;
-    private String containerId;
 
 
-    public RemoteCommandExecutor(String containerId) {
-            this.containerId = containerId;
-            String url = "http://localhost:8080/kie-server/services/rest/server";
-            String username = "bpmsAdmin";
-            String password = "abcd1234!";
-            KieServicesConfiguration config = new KieServicesConfigurationImpl(url, username, password);
-            kieServicesClient = new KieServicesClientImpl(config);
+    public RemoteCommandExecutor() {
+    	//Creating a client to the KieServer requires a url, and username/password for a user
+    	//with the 'kie-server' role.
+    	String url = "http://localhost:9080/kie-server/services/rest/server";
+        String username = "bpmsAdmin";
+        String password = "abcd1234!";
+        KieServicesConfiguration config = new KieServicesConfigurationImpl(url, username, password);
+        kieServicesClient = new KieServicesClientImpl(config);
     }
 
-    public Object execute(Command command) {
-            BatchExecutionHelperProviderImpl batchExecutionHelperProviderImpl = new BatchExecutionHelperProviderImpl();
-            XStream xstream = batchExecutionHelperProviderImpl.newXStreamMarshaller();
-            String payload = xstream.toXML(command);
-            LOG.debug("payload=" + payload);
-            ServiceResponse<String> serviceResponse = kieServicesClient.executeCommands(containerId, payload); 
-            if (serviceResponse.getType().equals(ResponseType.FAILURE)) {
-            	throw new RuntimeException(serviceResponse.getMsg());
-            }
-            String response = serviceResponse.getResult();
-            LOG.debug("response=" + response);
-            return xstream.fromXML(response);
-    }
+	public Object execute(Command command, String containerId) {
+		BatchExecutionHelperProviderImpl batchExecutionHelperProviderImpl = new BatchExecutionHelperProviderImpl();
+		XStream xstream = batchExecutionHelperProviderImpl
+				.newXStreamMarshaller();
+		String payload = xstream.toXML(command);
+		LOG.debug("payload=" + payload);
+		ServiceResponse<String> serviceResponse = kieServicesClient
+				.executeCommands(containerId, payload);
+		if (serviceResponse.getType().equals(ResponseType.FAILURE)) {
+			throw new RuntimeException(serviceResponse.getMsg());
+		}
+		String response = serviceResponse.getResult();
+		LOG.debug("response=" + response);
+		return xstream.fromXML(response);
+	}
 }

@@ -10,14 +10,20 @@ import com.rhc.drools.example.util.RemoteCommandExecutor;
 
 public class Runner {
 	public static void main(String[] args) {
+		//Create a Fact
 		Person person = new Person();
 		person.setName("Sal");
-		Person sal = determinePersonsAge(person);
+		
+		//Determine age using a certain container
+		Person sal = determinePersonsAge(person, "age");
+		
+		//Was our age set correctly?
 		System.out.println(sal);
 	}
 	
-	private static Person determinePersonsAge(Person person) {
-		RemoteCommandExecutor remoteCommandExecutor = new RemoteCommandExecutor("age");
+	private static Person determinePersonsAge(Person person, String containerId) {
+		//The container id is used to specify the KieBase to be used on the remote server
+		RemoteCommandExecutor remoteCommandExecutor = new RemoteCommandExecutor();
 
         BatchExecutionCommandImpl batchExecutionCommand = new BatchExecutionCommandImpl();
         
@@ -31,7 +37,7 @@ public class Runner {
         batchExecutionCommand.getCommands().add(insertObjectCommand);
         batchExecutionCommand.getCommands().add(fireAllRulesCommand);
 
-        ExecutionResults executionResult = (ExecutionResults) remoteCommandExecutor.execute(batchExecutionCommand);
+        ExecutionResults executionResult = (ExecutionResults) remoteCommandExecutor.execute(batchExecutionCommand, containerId);
 		
         //Get the person object back 
         Object result = executionResult.getValue("person");

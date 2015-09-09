@@ -3,13 +3,13 @@ package com.rhc.drools.example;
 import org.kie.api.KieBase;
 import org.kie.api.runtime.KieSession;
 
-import com.rhc.drools.example.kie.KieBaseProvider;
+import com.rhc.drools.example.kie.EmbeddedKieBaseProvider;
 import com.rhc.drools.example.model.Person;
 
 public class Runner {
 	public static void main(String[] args) {
 		//Get the KieBase
-		KieBaseProvider kbp = new KieBaseProvider();
+		EmbeddedKieBaseProvider kbp = new EmbeddedKieBaseProvider();
 		KieBase kieBase = kbp.getKieBase();
 		
 		//Create a Fact
