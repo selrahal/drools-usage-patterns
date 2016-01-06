@@ -11,7 +11,7 @@
 	<artifactId>drools-usage-patterns-kjar</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Drools Usage Pattern Kjar</name>
+	<name>Drools Usage Patterns Kjar</name>
 
 	<dependencies>
 		<dependency>
