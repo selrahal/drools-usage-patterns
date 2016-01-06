@@ -12,15 +12,25 @@ public class Runner {
 		KieBaseProvider kbp = new KieBaseProvider();
 		KieBase kieBase = kbp.getKieBase();
 		
-		//Create a Fact
-		Person person = new Person();
-		person.setName("Sal");
+		//Continually evaluate ruleset to see changes
+		while (true) {
+			//Create a Fact
+			Person person = new Person();
+			person.setName("Sal");
+			
+			//Determine age with Drools
+			Person sal = determinePersonsAge(person,kieBase);
+			
+			//Was our age set correctly?
+			System.out.println(sal);
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				//That's ok
+			}
+		}
 		
-		//Determine age with Drools
-		Person sal = determinePersonsAge(person,kieBase);
-		
-		//Was our age set correctly?
-		System.out.println(sal);
 	}
 	
 	private static Person determinePersonsAge(Person person, KieBase kieBase) {

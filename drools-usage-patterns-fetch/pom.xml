@@ -35,11 +35,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>com.rhc.drools.example</groupId>
 			<artifactId>drools-usage-patterns-model</artifactId>
 		</dependency>
